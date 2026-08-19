@@ -7,8 +7,6 @@ function App() {
   return (
     <AppContainer>
       <Menu/>
-      <Chat/>
-      <LenghtMeter/>
     </AppContainer>
   )
 }
