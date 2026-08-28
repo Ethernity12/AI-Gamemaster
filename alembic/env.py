@@ -4,6 +4,8 @@ from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
+from app.engine.settings import Settings
+
 from app.database.base import Base
 
 from app.database.models.characters import Character
@@ -14,6 +16,12 @@ from app.database.models.messages import Message
 
 config = context.config
 
+settings = Settings()
+
+config.set_main_option(
+    "sqlalchemy.url",
+    settings.postgres_url
+)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
