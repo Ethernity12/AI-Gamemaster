@@ -21,9 +21,10 @@ def create_provider(config: Settings) -> LLMProvider:
         from app.llm.api_provider import APILLMProvider
         
         return APILLMProvider(
-            base_url=config["LLM_BASE_URL"],
-            api_key=config.get("LLM_API_KEY", "local"),
-            model=config["LLM_MODEL"],
+            api_url=config.api_host,
+            api_port=config.api_port,
+            api_key=config.api_key,
+            model=config.llm_model,
         )
         
     raise ValueError(f"Unknown LLM provider: {provider_name}")

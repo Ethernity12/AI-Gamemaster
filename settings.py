@@ -47,8 +47,12 @@ class Settings:
         return self._config.get("LLM_PROVIDER", "dummy")
     
     @property
-    def api_base_url(self) -> str:
-        return self._config.get("API_BASE_URL", "http://localhost:8000/")
+    def api_host(self) -> str:
+        return self._config.get("API_HOST", "localhost")
+    
+    @property
+    def api_port(self) -> str:
+        return self._config.get("API_PORT", 8080)
     
     @property
     def api_key(self) -> str:

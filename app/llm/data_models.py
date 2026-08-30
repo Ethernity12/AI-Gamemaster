@@ -9,6 +9,6 @@ class GenerationConfig(BaseModel):
     
     extra_body: dict[str, Any] = Field(default_factory=dict)
     
-class Message:
+class Message(BaseModel):
     role: Literal["system", "user", "assistant", "tool"]
     content: str
