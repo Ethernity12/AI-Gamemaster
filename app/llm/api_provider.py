@@ -1,4 +1,4 @@
-from app.llm.data_models import GenerationConfig
+from app.llm.data_models import GenerationConfig, Message
 from app.llm.provider import LLMProvider
 
 
@@ -7,5 +7,5 @@ class APILLMProvider(LLMProvider):
         self.base_url: str = base_url
         self.api_key: str = api_key
         self.model: str = model
-    async def generate(self, messages: list[dict], config: GenerationConfig):
+    async def generate(self, messages: list[Message], config: GenerationConfig):
         pass

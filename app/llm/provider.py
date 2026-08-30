@@ -1,6 +1,7 @@
 from typing import Protocol
 from pathlib import Path
 from os import cpu_count
+from settings import Settings
 from app.llm.data_models import GenerationConfig, Message
 
 
@@ -8,9 +9,7 @@ class LLMProvider(Protocol):
     async def generate(self, messages: list[Message], config: GenerationConfig | None = None) -> str:
         ...
         
-def create_provider() -> LLMProvider:
-    from app.engine.settings import Settings
-    config = Settings()
+def create_provider(config: Settings) -> LLMProvider:
     provider_name = config.llm_provider
     
     if provider_name == "dummy":

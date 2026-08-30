@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from app.llm import provider
+from app.api.routes.chat import router as chat_router
 from app.database.connector import DatabaseConnector
-from app.engine.settings import Settings
+from settings import Settings
 
 from contextlib import asynccontextmanager
 
@@ -10,13 +11,15 @@ settings = Settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     database = DatabaseConnector(settings.postgres_url)
-    await database.check_connection()
+    await database.check_health()
+    app.state.llm = provider.create_provider(settings)
     app.state.database = database
     yield
     await database.close()
 
-app = FastAPI(lifespan=lifespan)
-llm_provider = provider.create_provider()
+app = FastAPI(title="AI GameMaster API", lifespan=lifespan)
+
+app.include_router(chat_router, prefix="/chat", tags=["Chat"])
 
 @app.get("/health")
 async def api_status():
@@ -26,8 +29,3 @@ async def api_status():
         "status": "ok" if database_ok else "degraded",
         "database": "ok" if database_ok else "unavailable",
     }
-
-@app.post("/chat")
-async def chat_endpoint(prompt: str):
-    response = await llm_provider.generate(prompt)
-    return {"response": response}
