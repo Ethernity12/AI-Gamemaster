@@ -5,7 +5,6 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
 
 
-
 class DatabaseConnector:
     def __init__(self, database_url: str) -> None:
         self._engine: AsyncEngine = create_async_engine(
