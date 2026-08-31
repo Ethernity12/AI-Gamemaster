@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from app.llm import provider
 from app.api.routes.chat import router as chat_router
 from app.database.connector import DatabaseConnector
+from app.services.SessionService import SessionService
+from app.database.repositories.session_repository import SessionRepository
 from settings import Settings
 
 from contextlib import asynccontextmanager
@@ -11,9 +13,15 @@ settings = Settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     database = DatabaseConnector(settings.postgres_url)
-    await database.check_health()
+    
+    if not await database.check_health():
+        raise RuntimeError("Database is unavailable")
+    
+    session_repository = SessionRepository(database)
+    session_service = SessionService(session_repository)
     app.state.llm = provider.create_provider(settings)
     app.state.database = database
+    app.state.session_service = session_service
     yield
     await database.close()
 
