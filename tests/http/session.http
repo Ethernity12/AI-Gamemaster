@@ -11,3 +11,17 @@ Content-Type: application/json
 
 ### Get a session by ID
 GET http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
+
+
+### Update a session by ID
+PATCH http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
+Content-Type: application/json
+
+{
+    "title": "Updated Bleach RP",
+    "setting": "Updated Bleach"
+}
+
+### Delete a session by ID
+DELETE http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
+
