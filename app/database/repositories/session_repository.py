@@ -1,3 +1,4 @@
+from time import strftime
 from uuid import UUID
 from app.database.connector import DatabaseConnector
 from app.database.models.sessions import Session
@@ -16,9 +17,9 @@ class SessionRepository:
             
         return result.scalar_one_or_none()
     
-    async def create(self) -> Session:
+    async def create(self, title: str, setting: str | None) -> Session:
         async with self._db_connector.session() as session:
-            db_session = Session()
+            db_session = Session(title=title, setting=setting)
 
             session.add(db_session)
 

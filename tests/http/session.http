@@ -1,0 +1,13 @@
+### Create a new session
+POST http://127.0.0.1:8000/sessions
+Content-Type: application/json
+
+{
+    "title": "Bleach RP",
+    "setting": "Bleach"
+}
+
+
+
+### Get a session by ID
+GET http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de

@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from app.llm import provider
 from app.api.routes.chat import router as chat_router
+from app.api.routes.session import router as session_router
 from app.database.connector import DatabaseConnector
-from app.services.SessionService import SessionService
+from app.services.session_service import SessionService
 from app.database.repositories.session_repository import SessionRepository
 from settings import Settings
 
@@ -28,6 +29,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="AI GameMaster API", lifespan=lifespan)
 
 app.include_router(chat_router, prefix="/chat", tags=["Chat"])
+app.include_router(session_router, prefix="/sessions", tags=["Sessions"])
 
 @app.get("/health")
 async def api_status():
