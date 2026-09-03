@@ -1,5 +1,5 @@
 ### Create a new session
-POST http://127.0.0.1:8000/sessions
+POST http://127.0.0.1:8000/api/sessions
 Content-Type: application/json
 
 {
@@ -10,11 +10,11 @@ Content-Type: application/json
 
 
 ### Get a session by ID
-GET http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
+GET http://127.0.0.1:8000/api/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
 
 
 ### Update a session by ID
-PATCH http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
+PATCH http://127.0.0.1:8000/api/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
 Content-Type: application/json
 
 {
@@ -23,5 +23,5 @@ Content-Type: application/json
 }
 
 ### Delete a session by ID
-DELETE http://127.0.0.1:8000/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
+DELETE http://127.0.0.1:8000/api/sessions/d08cf405-06cc-4055-8bb5-7f79b2d652de
 

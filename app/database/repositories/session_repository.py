@@ -1,4 +1,3 @@
-from time import strftime
 from uuid import UUID
 from app.database.connector import DatabaseConnector
 from app.database.models.sessions import Session

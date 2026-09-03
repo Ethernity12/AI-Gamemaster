@@ -9,3 +9,9 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     response: str
+    
+class ChatHistoryRequest(BaseModel):
+    session_id: UUID
+    
+class ChatHistoryResponse(BaseModel):
+    history: list[dict]
